@@ -15,10 +15,14 @@
     } );
     
     //Показать телефон ...
-    wp.customize( 'test_show_phone', function( value ) {
-        value.bind( function( newval ) {
-            false === newval ? $('.test-phone').fadeOut() : $('.test_phone').fadeIn();
-        } );
-    } );
+	wp.customize( 'test_show_phone', function( value ) {
+		value.bind( function( newval ) {
+			if (false === newval) {
+				$('.test-phone').fadeOut();
+			} else {
+			    $('.test-phone').fadeIn();
+			}
+		} );
+	} );
     
 } )( jQuery );

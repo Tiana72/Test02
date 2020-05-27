@@ -38,7 +38,7 @@
                 'container_id'    => 'navbarSupportedContent',
                 'walker'          => new Test_Menu,
             )); ?>
-            <p class="test-phone" <?php if (false === get_theme_mod('test_show_phone')) echo ' style="display: none;"' ?>> 
+            <p class="test-phone"<?php if(false === get_theme_mod('test_show_phone')) echo ' style="display: none;"' ?>>
                 Тел.: <span><?php echo get_theme_mod('test_phone'); ?></span>
             </p>
         </div>

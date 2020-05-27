@@ -21,6 +21,7 @@ add_action( 'wp_enqueue_scripts', 'test_scripts' );
 
 // Добавляем новые объекты в макет
 function test_setup() {
+    load_theme_textdomain( 'test02', get_template_directory() . '/languages' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'title-tag' );
     add_theme_support( 'custom-logo', array(
@@ -39,8 +40,8 @@ function test_setup() {
     ) );    
     add_image_size( 'test-thumb', 100, 100 );
     register_nav_menus( array(
-        'header_menu1' => 'Основное меню',
-        'footer_menu2' => 'Подвал'
+        'header_menu1' => __('Основное меню', 'test02'),
+        'footer_menu2' => __('Подвал', 'test02'),
     ) );
 }
 add_action( 'after_setup_theme', 'test_setup' );
@@ -59,7 +60,7 @@ function my_navigation_template( $template, $class ){
 add_action( 'widgets_init', 'test_widgets' );
 function test_widgets(){
 	register_sidebar( array(
-		'name'          => 'Right sidebar',
+		'name'          => __('Правый сайдбар', 'test02'),
 		'id'            => "sidebar-right",
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => "</div>\n",
@@ -70,7 +71,7 @@ function test_widgets(){
 add_action( 'widgets_init', 'test_widgets1' );
 function test_widgets1(){
 	register_sidebar( array(
-		'name'          => 'Left sidebar',
+		'name'          => __('Левый сайдбар', 'test02'),
 		'id'            => "sidebar-left",
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => "</div>\n",
@@ -94,7 +95,7 @@ function test_customize_register($wp_customize) {
             $wp_customize,
             'test_link_color',
             array (
-                'label' => 'Цвет ссылок',
+                'label' => __('Цвет ссылок', 'test02'),
                 'section' => 'colors',
                 'setting' => 'test_link_color',
             )
@@ -102,7 +103,7 @@ function test_customize_register($wp_customize) {
 
     // custom section
     $wp_customize -> add_section ('test_site_data', array (
-        'title' => 'Информация о сайте',
+        'title' => __('Информация о сайте', 'test02'),
         'priority' => 20,
     ) );
     $wp_customize -> add_setting('test_phone', array (
@@ -112,28 +113,26 @@ function test_customize_register($wp_customize) {
     $wp_customize -> add_control(
             'test_phone',
             array (
-                'label' => 'Телефон',
+                'label' => __('Телефон', 'test02'),
                 'section' => 'test_site_data',
                 'type' => 'text',
             )
         );
 
-        $wp_customize -> add_setting('test_show_phone', array (
-            'default' => true,
-            'transport' => 'postMessage', 
-        ) );
-        $wp_customize -> add_control(
-                'test_show_phone',
-                array (
-                    'label' => 'Показать',
-                    'section' => 'test_site_data',
-                    'type' => 'checkbox',
-                )
-            );
+    $wp_customize -> add_setting('test_show_phone', array (
+        'default' => true,
+        'transport' => 'postMessage',
+    ) );
+    $wp_customize -> add_control(
+            'test_show_phone',
+            array (
+                'label' => __('Показать телефон', 'test02'),
+                'section' => 'test_site_data',
+                'type' => 'checkbox',
+            )
+        );
     
 }
-
-
 add_action('customize_register', 'test_customize_register');
 
 /* function test_customize_css() {
@@ -153,7 +152,6 @@ a, a:hover { color: $test_link_color; }
 </style>
 HEREDOC;
 }
-
 add_action( 'wp_head', 'test_customize_css');
 
 function test_customize_js () {

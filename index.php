@@ -19,7 +19,7 @@
                                 <p class="card-text"><?php  the_excerpt(); //the_content(''); // ?></p>
                             </div>
                             <div class="card-footer">
-                                <a href="<?php the_permalink(); ?>" class="btn btn-primary">Читать далее...</a>
+                                <a href="<?php the_permalink(); ?>" class="btn btn-primary"><?php _e('Читать далее...', 'test02'); ?></a>
                             </div>
                         </div>
                     </div>
@@ -30,12 +30,11 @@
                         'end_size'     => 2,
                         'mid_size'     => 2,
                         'prev_next'    => true,
-                        'prev_text'    => __('« Назад'),
-                        'next_text'    => __('Вперед »'),
+                        'prev_text'    => __('« Назад', 'test02'),
+                        'next_text'    => __('Вперед »', 'test02'),
                         'type'         => 'list',
                         'add_args'     => false,
                         'add_fragment' => '',
-                        'screen_reader_text' => __( ' ' ),
                     ) ); ?>
                 <?php else: ?>
                     <!-- нет постов -->
