@@ -47,7 +47,25 @@
     </div>
 </div>
 
+<!-- <?php $query = new WP_Query('cat=31,21&posts_per_page=-1'); ?> -->
+<?php $query = new WP_Query( array (
+    //'cat' => '31,21',
+    'category_name' => 'edge-case-2, markup',
+    'posts_per_page' => '-1',
+    'orderby' => 'title',
+    'order' => 'ASC',
+    ) ); ?>
+    
+<?php if ($query->have_posts()): while ($query->have_posts()): $query->the_post();?>
+    <!-- пост -->
+    <h3><?php the_title() ; ?></h3>
+<?php endwhile; ?>
+    <!-- навигация -->
+<?php else: ?>
+    <!-- нет постов -->
+<?php endif; ?>
 
-
+<!-- Возвращаем оригинальные данные поста. Сбрасываем $post. -->
+<?php wp_reset_postdata() ; ?>
 
 <?php get_footer(); ?>
